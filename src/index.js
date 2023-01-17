@@ -50,16 +50,24 @@ function decode(expr) {
 
     for (i = 0; i <= 10; ) {
       if (partExpr.substr(i, 2) == 10) {
-        letter += ".";
+        letter += `.`;
         i += 2;
       } else if (partExpr.substr(i, 2) == 11) {
-        letter += "-";
+        letter += `-`;
+        i += 2;
+      } else if (partExpr.substr(i, 2) == "**") {
+        letter += `*`;
         i += 2;
       } else {
         i += 2;
       }
     }
-    newExpr += MORSE_TABLE[letter];
+    if (letter == `*****`) {
+      newExpr += " ";
+    } else {
+      newExpr += MORSE_TABLE[letter];
+    }
+
     start += 10;
     letter = "";
   }
